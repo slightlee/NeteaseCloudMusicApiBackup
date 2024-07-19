@@ -46,8 +46,9 @@ module.exports = async (query, request) => {
 
   // 把url地址为空的、VIP可听/所在专辑需单独付费，就添加魔法
   // https://github.com/Binaryify/NeteaseCloudMusicApi/issues/899#issuecomment-680002883
+  // 音源 https://github.com/UnblockNeteaseMusic/server   -> pyncmd 第三方api
   if (!song.url || [1, 4].includes(song.fee)) {
-    const source = query.source || 'migu'
+    const source = query.source || 'pyncmd'
     const { url } = await match(query.id, [source]) // 这里只设置一个源，避免多个产生随机选择问题
     song.url = url
   }
